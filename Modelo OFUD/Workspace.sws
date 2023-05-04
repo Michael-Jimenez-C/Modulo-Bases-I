@@ -4,7 +4,8 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{7E5B1BC5-4DD4-451A-8B07-200FF8419BDF}" Name="LogicalDataModel_1" Selected="Yes" Type="{5F45F978-C4F3-4E35-A3FC-AF3318663A0F}" URL="LogicalDataModel_1.ldm"/>
+		<Model Expanded="Yes" ID="{7E5B1BC5-4DD4-451A-8B07-200FF8419BDF}" Name="LogicalDataModel_1" Type="{5F45F978-C4F3-4E35-A3FC-AF3318663A0F}" URL="LogicalDataModel_1.ldm"/>
+		<Model Expanded="Yes" ID="{56BC5311-ACBA-420A-80A8-FFBCE2EA3654}" Name="logico" Selected="Yes" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="logico.pdm"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>
