@@ -3,11 +3,6 @@ import command.Comandos
 app=Flask(__name__,static_folder="./static",template_folder="./templates")
 
 #Rutas
-@app.route("/estudiantes")
+@app.route("/")
 def home():
-    return render_template("estudiantes.html")
-
-
-@app.route("/registro")
-def home():
-    return render_template("registro.html")
+    return render_template("login.html")
