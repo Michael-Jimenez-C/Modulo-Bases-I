@@ -7,8 +7,8 @@ class Conexion:
     def getConexion():
         if Conexion.__conexion==None:
             Conexion.__conexion= oracledb.connect(
-                                        user="BD12023",
-                                        password='BD12023',
+                                        user="bd2",
+                                        password='bd2',
                                         dsn='localhost')
         return Conexion.__conexion
         

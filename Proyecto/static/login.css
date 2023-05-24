@@ -1,0 +1,57 @@
+body{
+    background-color: azure;
+}
+
+div#modulo{
+    min-width: 100px;
+    min-height: 100px;
+}
+
+.form h1{
+    text-align: center;
+}
+
+.form{
+    width: max-content;
+    height: 40%;
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+    margin: auto;
+    padding: 10px 30px;
+    box-sizing: border-box;
+    border: gray solid 1px;
+}
+
+.form input{
+    width: 90%;
+    height: 80%;
+    display: block;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.form label{
+    margin-left: auto;
+}
+
+.form div{
+    width: 100%;
+    height: max-content;
+    display: flex;
+    padding: 10px 0px;
+}
+
+.form div a{
+    padding: 10px 40px;
+    background-color: gray;
+    color: white;
+    margin: 0 10px;
+    display: inline-block;
+}
+
+.form div a:hover{
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}

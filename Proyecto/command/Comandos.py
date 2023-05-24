@@ -8,7 +8,7 @@ class CMD(ABC):
         pass        
 
 class GenericCMD(CMD):
-    def execute(self,params:dict):
+    def execute(params:dict):
         '''
             params debe tener
                 Comando

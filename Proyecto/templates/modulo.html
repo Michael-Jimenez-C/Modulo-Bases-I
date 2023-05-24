@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="../static/login.css">
+    <script src="../static/modulo.js"></script>
+</head>
+<body>
+    <div id="logreg">
+        <div id="login" class="form">
+            <h1>Acceder</h1>
+            <label>Correo:</label><input type="email" maxlength="40" class="acceder correo" value="sanf@gmail.com">
+            <label>Codigo:</label><input type="password" maxlength="4" class="acceder codigo" value="0008">
+            <div>
+                <a onclick="acceder()">Aceptar</a>
+                <a onclick="swtch()">No tengo cuenta</a>
+            </div>
+        </div>
+        <div id="registro" class="form" style="display:none;">
+            <h1>Registro</h1>
+            <label>Nombres:</label><input type="text" maxlength="30" class="registro nombre">
+            <label>Apellidos:</label><input type="text" maxlength="30" class="registro apellido">
+            <label>Correo:</label><input type="email" maxlength="40" class="registro correo">
+            <label>Codigo:</label><input type="password" maxlength="4" class="registro codigo">
+            <div>
+                <a>Aceptar</a>
+                <a onclick="swtch()">Ya tengo cuenta</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="modulo" style="display:none">
+        <div class="moduloIn"></div>
+        <h2 id="time"></h2>
+        <div id="pest">
+            <ul>
+                <li><a>Calendario</a></li>
+                <li><a>Selección</a></li>
+                <li><a>Reporte asistencia</a></li>
+                <li><a>liquidación estudiantes</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

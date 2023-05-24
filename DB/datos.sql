@@ -1,6 +1,6 @@
-#create user bdmodulo identified by bdmodulo;
-#grant connect, dba, resource to bdmodulo;
-#start ./db.sqp;
+--create user bdmodulo identified by bdmodulo;
+--grant connect, dba, resource to bdmodulo;
+--start ./db.sqp;
 
 insert into generoobra values ('1', 'Música Culta');
 insert into generoobra values ('2', 'Música Folclórica');
@@ -67,7 +67,7 @@ insert into estudiante values ('2017100400','3','juan felipe','fernandez rodrigu
 insert into estudiante values ('2017100409','3','juan andres','perez dias', date '2017-01-01',date '2001-01-01','jffernandezr@udistrital.edu.co');
 insert into estudiante values ('2017100429','4','juan carlos','fernandez rodriguez', date '2017-01-01',date '2001-01-01','jcfernandezr@udistrital.edu.co');
 insert into estudiante values ('2017100408','5','juan camilo','rodriguez fernandez', date '2017-01-01',date '2001-01-01','jcrodriguezr@udistrital.edu.co');
-insert into estudiante values ('2017100409','7','diego alberto','gonzales perez', date '2017-01-01',date '2001-01-01','dagonzalesp@udistrital.edu.co');
+insert into estudiante values ('2017100208','7','diego alberto','gonzales perez', date '2017-01-01',date '2001-01-01','dagonzalesp@udistrital.edu.co');
 insert into estudiante values ('2017100406','3','luz daniela','gonzales dias', date '2017-01-01',date '2001-01-01','ldgonzalesd@udistrital.edu.co');
 insert into estudiante values ('2019100403','3','pedro emilio','gonzales gonzales', date '2019-01-01',date '2001-01-01','pegonzalesg@udistrital.edu.co');
 insert into estudiante values ('2019100406','3','alberto','garcia gaviria', date '2019-01-01',date '2001-01-01','agarciag@udistrital.edu.co');
