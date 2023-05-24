@@ -1,6 +1,6 @@
 import getpass
 import oracledb
-oracledb.init_oracle_client(config_dir='/opt/myconfigdir')
+oracledb.init_oracle_client(config_dir='./opt/myconfigdir')
 import json
 class Conexion:
     __conexion=None
