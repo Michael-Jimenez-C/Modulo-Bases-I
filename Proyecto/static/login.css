@@ -13,7 +13,6 @@ div#modulo{
 
 .form{
     width: max-content;
-    height: 40%;
     background-color: white;
     border-radius: 10px;
     position: relative;
@@ -51,6 +50,60 @@ div#modulo{
 }
 
 .form div a:hover{
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+/*Paginas
+
+*/
+.moduloIn h1{
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    border: solid 1px gray;
+    width: max-content;
+}
+
+.moduloIn h2{
+    padding: 10px;
+    background-color: rgb(209, 209, 209);
+    border-radius: 10px;
+    border: solid 1px rgb(153, 134, 134);
+    width: max-content;
+    color: rgb(0, 0, 104);
+}
+
+#pest ul{
+    background-color: rgb(15, 15, 15);
+    position: relative;
+    top:0.7cm;
+    left: 0;
+    height: min-content;
+    display: flex;
+    width: 100%;
+    padding: 0 0.3cm;
+    list-style: none;
+    box-sizing: border-box;
+    text-transform: capitalize;
+}
+
+#pest ul li{
+    display: inline-block;
+    text-align: center;
+}
+
+#pest ul li a{
+    color: white;
+    display: block;
+    padding: 0.5cm 0.5cm;
+    width: 5cm;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+#pest ul li a:hover{
     background-color: white;
     color: black;
     cursor: pointer;

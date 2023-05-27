@@ -12,8 +12,7 @@ def home():
 def verusu():
     if request.method == 'POST':
         data=request.get_json()
-        dat=GenericCMD.execute({"comando":f"select nombre, apellido, rol from empleado where lower(correo)=lower('{data['correo']}') and icodempleado='{data['codigo']}'","commit":False})
-        print(dat, len(dat))
+        dat=GenericCMD.execute({"comando":f"select nombre, apellido, rol from empleado where lower(correo)=lower('{data['correo']}')","commit":False})
     return jsonify({"ok":True if len(dat)>0 else False,"data":list(dat[0])})
 
 app.run()
