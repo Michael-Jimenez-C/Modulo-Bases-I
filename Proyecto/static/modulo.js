@@ -30,7 +30,6 @@ async function acceder(){
 function iniciarmodulo(data){
     let nombre=data['data'][0];
     let apellido=data['data'][1];
-
     let modroot=ReactDOM.createRoot(document.getElementById("modulo"));
     let d=e('div',{className:'moduloIn'},[
         e('h1',null,'Bienvenido '+nombre+' '+apellido),
@@ -41,12 +40,15 @@ function iniciarmodulo(data){
                 e('li',null,e('a',null,'Seleccion')),
                 e('li',null,e('a',null,'Asistencia')),
                 e('li',null,e('a',null,'Liquidacion'))
-            ])
+            ]),
+            e('div',{id:'ventana'},null)
         ])
     ])
     modroot.render(d)
-    let it=document.getElementById('time');
-    setInterval(()=>{it.innerHTML=(new Date()).toLocaleString('es',{daysStyle:'short',dateStyle:'long',timeStyle: 'short'})}, 1000*60);
+    setInterval(()=>{
+        let it=document.getElementById('time');
+        it.innerHTML=(new Date()).toLocaleString('es-co',{daysStyle:'short',dateStyle:'long',timeStyle: 'short'})
+    }, 1000*30);
 }
 
 
@@ -56,10 +58,10 @@ const logindiv=document.getElementById('logreg')
 
 const loginroot=ReactDOM.createRoot(logindiv)
 
-login=e('div',{id:'login', className:'form'},[
+login=e('div',{id:'login', className:'form centrado'},[
     e('h1',null,"Ingresar"),
     e('label',null,"correo"),
-    e('input',{type:"email",maxLength:"40", className:"acceder correo",value:"sanf@gmail.com"},null),
+    e('input',{type:"email",maxLength:"40", className:"acceder correo",defaultValue:"sanf@gmail.com"},null),
     e('div',null,[
         e('a',{onClick:()=>{
             acceder()

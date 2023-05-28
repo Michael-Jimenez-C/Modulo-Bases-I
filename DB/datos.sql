@@ -136,3 +136,7 @@ insert into personalobra values (3,'5','0008','8','5',date '2023-02-01', date '2
 insert into personalobra values (6,'1','0009','9','5',date '2023-02-01', date '2023-05-31');
 insert into personalobra values (7,'1','0010','10','5',date '2023-02-01', date '2023-05-31');
 
+-- estados:
+
+insert into estado values ('Activo');
+insert into estado values ('Inactivo');
