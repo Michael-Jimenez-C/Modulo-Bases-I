@@ -26,7 +26,7 @@ div#modulo{
     margin: auto;
 }
 
-.form input{
+.form input, .form select{
     width: 90%;
     height: 80%;
     display: block;

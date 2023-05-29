@@ -20,11 +20,19 @@ def verusu():
         dat=GenericCMD.execute({"comando":f"select nombre, apellido, rol from empleado where lower(correo)=lower('{data['correo']}') and rol=3","commit":False})
     return jsonify({"ok":True if len(dat)>0 else False,"data":list(dat[0])})
 
-@app.route("/cons")
+@app.route("/cons",methods=["POST","GET"])
 def cons():
     if request.method=='POST':
         data=request.get_json()
-        dat=GenericCMD.execute({"comando":data['comando'],"commit":False})
-    return jsonify({"data":data})
+        print(data["comando"])
+        if "insert" in data['comando']:
+            GenericCMD.execute({"comando":data['comando'],"commit":True})
+            return ""
+        else:
+            dat=GenericCMD.execute({"comando":data['comando'],"commit":True})
+        print("ok")
+        
+    return jsonify({"data":dat})
 
 app.run()
+
