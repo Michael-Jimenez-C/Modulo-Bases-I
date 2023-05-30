@@ -129,3 +129,25 @@ div#modulo{
     color: black;
     cursor: pointer;
 }
+
+
+#panel{
+    width: 100%;
+    background: white;
+    min-height: 50vh;
+    height: max-content;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+
+.cuadro{
+    width: max-content;
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+    padding: 10px 30px;
+    box-sizing: border-box;
+    border: gray solid 1px;
+    margin-bottom: 10px;
+}

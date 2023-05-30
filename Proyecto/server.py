@@ -25,7 +25,7 @@ def cons():
     if request.method=='POST':
         data=request.get_json()
         print(data["comando"])
-        if "insert" in data['comando']:
+        if "insert" in data['comando'] or "update" in data['comando']:
             GenericCMD.execute({"comando":data['comando'],"commit":True})
             return ""
         else:

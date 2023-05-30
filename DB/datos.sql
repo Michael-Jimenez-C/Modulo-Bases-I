@@ -18,8 +18,12 @@ insert into compositor values ('3','3','George Gershwin');
 insert into compositor values ('4','4','George Bizet');
 insert into compositor values ('5','5','Dmitri shostakovich');
 
+insert into periodo values (1,'202301');
+insert into periodo values (2,'202302');
+insert into periodo values (3,'202401');
+
 insert into obra values ('1','1',Null,'1','1',Date '1824-01-01','La novena sinfonía',1);
-insert into obra values ('2','2',Null,'2','1',Date '1853-01-01','La traviata',1);
+insert into obra values ('2','2',1,'2','1',Date '1853-01-01','La traviata',1);
 insert into obra values ('3','3',Null,'3','1',Date '1924-01-01','Rhapsody in blue',1);
 insert into obra values ('4','4',Null,'4','1',Date '1875-01-01','Carmen',1);
 insert into obra values ('5','5',Null,'5','1',Date '1937-01-01','Symphony No.5',1);
@@ -31,10 +35,7 @@ insert into instrumento values ('4','Chelo');
 insert into instrumento values ('5','Trompeta');
 insert into instrumento values ('6','Flauta');
 insert into instrumento values ('7','Guitarra');
-
-insert into periodo values (1,'202301');
-insert into periodo values (2,'202302');
-insert into periodo values (3,'202401');
+ 
 --valor /100->
 insert into listaactividadud values (1,'1','Direccion musical',1500,2);
 insert into listaactividadud values (1,'2','Evaluador musical',800,2);

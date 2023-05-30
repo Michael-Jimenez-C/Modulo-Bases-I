@@ -215,8 +215,8 @@ create table CALENDARIO (
    IDOBRA               VARCHAR2(4)           not null,
    CONSECCALENDARIO     NUMBER(4,0)           not null,
    IDESTADO             VARCHAR2(10)          not null,
-   FECHAINICIO          DATE                  not null,
-   FECHAFIN             DATE                  not null,
+   FECHAINICIO          TIMESTAMP                  not null,
+   FECHAFIN             TIMESTAMP                  not null,
    constraint PK_CALENDARIO primary key (IDTIPOCALEN, IDOBRA, CONSECCALENDARIO)
 );
 

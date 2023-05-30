@@ -58,15 +58,14 @@ async function init(){
         e('label',null,'Estado'),
         est,
         e('a',{className:'boton',onClick:()=>{
-            let ti=document.getElementById('inicio').value
-            let fi=ti+' '+document.getElementById('inicioT').value
-            let tf=document.getElementById('fin').value
-            let fe=tf+' '+document.getElementById('finT').value
+            let fi=document.getElementById('inicio').value+' '+document.getElementById('inicioT').value
+            let fe=document.getElementById('fin').value+' '+document.getElementById('finT').value
             if ((new Date(fi))<(new Date(fe))){
                 let tc=document.getElementById('tipocalen').value
                 let ob=document.getElementById('obr').value
                 let est=document.getElementById('est').value
-                let comando="insert into calendario values ('"+tc+"','"+ob+"',(select coalesce(v,0)+1 from (select max(conseccalendario) v from calendario)),'"+est+"', DATE '"+ti+"', DATE '"+tf+"')"
+                let comando="insert into calendario values ('"+tc+"','"+ob+"',(select coalesce(v,0)+1 from (select max(conseccalendario) v from calendario)),'"+est+"', timestamp '"+fi+":00', timestamp '"+fe+":00')"
+                console.log(comando)
                 consulta(comando,false)
             }else{
                 alert('a ocurrido un error, la fecha final está antes que la fecha inicial')
