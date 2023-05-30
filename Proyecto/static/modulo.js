@@ -90,7 +90,7 @@ async function calendario(){
             e('h3',null,dat['data'][i][0]),
             e('h3',null,(new Date(dat['data'][i][1])).toLocaleString('es-co',{daysStyle:'short',dateStyle:'long',timeStyle: 'short'})+"---"+(new Date(dat['data'][i][2])).toLocaleString('es-co',{daysStyle:'short',dateStyle:'long',timeStyle: 'short'})),
             e('a',{className:"boton",onClick:()=>{
-                consulta("update calendario set idestado = 'Inactivo' WHERE conseccalendario ="+dat['data'][i][3]),
+                consulta("update calendario set idestado = 'Inactivo' WHERE conseccalendario ="+dat['data'][i][3])
                 document.getElementById("recuadro"+i).remove()
             }},'Terminar calendario')
         ]))
@@ -113,7 +113,12 @@ async function seleccion(){
         tab.push(e('tr',{className:"ContenidoFila"},fila))
 
         for(let i of res['data']){
-            //consulta('insert into participacionEstudiante values ((select coalesce(v,0)+1 from (select max(consecasis) v from participacionEstudiante)),'+i[2]+',select codestudiante,idtipocalen,idobra,conseccalendario from calendario where fechainicio<=sysdate and fechafin>=sysdate)')
+            let cale=await consulta("select C.idtipocalen,C.idobra,C.conseccalendario from calendario C, tipocalendario T where fechainicio<=sysdate and fechafin>=sysdate and C.idtipocalen=T.idtipocalen and C.idestado='Activo' and T.DESCTIPOCALENDARIO='Seleccion'")
+            
+            for(let w of cale['data']){
+                console.log("insert into participacionEstudiante values ((select coalesce(v,0)+1 from (select max(consecasis) v from participacionEstudiante)),"+i[2]+","+w[0]+","+w[1]+","+w[2]+")")
+                consulta("insert into participacionEstudiante values ((select coalesce(v,0)+1 from (select max(consecasis) v from participacionEstudiante)),'"+i[2]+"','"+w[0]+"','"+w[1]+"',"+w[2]+")")
+            }
             var fila=[]
             for(let j of i){
                 fila.push(e('td', {className:"ContenidoCelda"}, j))
@@ -124,7 +129,7 @@ async function seleccion(){
 
     }
     definepanel()
-    let dat=await consulta("select O.titulo, C.fechainicio, C.fechafin, C.conseccalendario from calendario C join tipocalendario T on C.idtipocalen=T.idtipocalen join obra O on C.idobra=O.idobra where C.idestado='Inactivo' and C.fechainicio<=sysdate and C.fechafin>=sysdate");
+    let dat=await consulta("select O.titulo, C.fechainicio, C.fechafin, C.conseccalendario from calendario C join tipocalendario T on C.idtipocalen=T.idtipocalen join obra O on C.idobra=O.idobra where C.idestado='Activo' and C.fechainicio<=sysdate and C.fechafin>=sysdate and T.DESCTIPOCALENDARIO='Seleccion'");
     if (dat['data'].length!=0){
         paneles=[]
         for(let i=0;i<dat['data'].length;i++){
@@ -133,6 +138,8 @@ async function seleccion(){
                 e('h3',null,(new Date(dat['data'][i][1])).toLocaleString('es-co',{daysStyle:'short',dateStyle:'long',timeStyle: 'short'})+"---"+(new Date(dat['data'][i][2])).toLocaleString('es-co',{daysStyle:'short',dateStyle:'long',timeStyle: 'short'})),
                 e('a',{className:"boton",onClick:()=>{
                     seleccionEv(dat['data'][i][0]);
+                    consulta("update calendario set idestado = 'Inactivo' WHERE conseccalendario ="+dat['data'][i][3])
+                    document.getElementById("recuadro"+i).remove()
                 }},'Seleccionar'),
             ]))
         }

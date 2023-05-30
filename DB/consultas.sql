@@ -76,3 +76,16 @@ and T.nominstrumento=I.nominstrumento
 and O.c1=E.codunidad
 and C.codestudiante=E.codestudiante;
 
+/*
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CONSECASIS                                NOT NULL NUMBER(4)
+ CODESTUDIANTE                             NOT NULL VARCHAR2(10)
+ IDTIPOCALEN                               NOT NULL VARCHAR2(2)
+ IDOBRA                                    NOT NULL VARCHAR2(4)
+ CONSECCALENDARIO                          NOT NULL NUMBER(4)
+*/
+
+insert into participacionEstudiante values ((select coalesce(v,0)+1 from (select max(consecasis) v from participacionEstudiante)), ,(select C.idtipocalen,C.idobra,C.conseccalendario from calendario C, tipocalendario T where fechainicio<=sysdate and fechafin>=sysdate and C.idtipocalen=T.idtipocalen and C.idestado='Activo' and T.DESCTIPOCALENDARIO='Seleccion'))
+
+select C.idtipocalen,C.idobra,C.conseccalendario from calendario C, tipocalendario T where fechainicio<=sysdate and fechafin>=sysdate and C.tipocalen=T.tipocalen and 

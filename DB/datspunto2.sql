@@ -25,7 +25,7 @@ ON calendario (idobra, fechaInicio, fechaFin);
 
 insert into calendario values (1,2,(select coalesce(v,0)+1 from (select max(conseccalendario) v from calendario)),'Activo',timestamp '2023-02-01 13:00:00',timestamp '2023-06-10 13:00:00');
 insert into calendario values (2,2,(select coalesce(v,0)+1 from (select max(conseccalendario) v from calendario)),'Activo',timestamp '2023-03-01 13:00:00',timestamp '2023-06-10 13:00:00');
-insert into calendario values (3,2,(select coalesce(v,0)+1 from (select max(conseccalendario) v from calendario)),'Activo',timestamp '2023-04-01 13:00:00',timestamp '2023-06-11 13:00:00');
+insert into calendario values (3,2,(select coalesce(v,0)+1 from (select max(conseccalendario) v from calendario)),'Activo',timestamp '2023-04-01 13:00:00',timestamp '2023-06-10 13:00:00');
 
 
 insert into calendario values (4,2,(select coalesce(v,0)+1 from (select max(conseccalendario) v from calendario)),'Activo',timestamp '2023-02-01 14:00:00',timestamp '2023-02-01 16:00:00');
