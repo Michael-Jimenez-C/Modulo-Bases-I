@@ -39,3 +39,40 @@ WHERE conseccalendario = N;
 CREATE INDEX index_name
 ON table_name (column_name);
 */
+
+
+---
+/*
+select E.nombre, E.apellido, E.codestudiante
+from estudiante E, convocatoriaestudiante C
+where E.codestudiante=C.codestudiante;
+
+select U.codunidad c1, U.nomunidad proyecto, U1.nomunidad facultad 
+from unidad U, unidad U1 
+where U.uni_codunidad=U1.codunidad
+
+
+select I.nominstrumento nominstrumento, max(C.calificacion) maxCal
+from convocatoriaestudiante C join instrumento I
+ON I.idinstrumento=C.idinstrumento
+group by I.nominstrumento
+
+*/
+
+
+select E.nombre, E.apellido, C.codestudiante, O.proyecto, O.facultad, T.nominstrumento, T.maxCal
+from 
+estudiante E, (select I.nominstrumento nominstrumento, max(C.calificacion) maxCal
+from convocatoriaestudiante C 
+join instrumento I
+ON I.idinstrumento=C.idinstrumento
+group by I.nominstrumento) T, convocatoriaestudiante C, instrumento I,
+(select U.codunidad c1, U.nomunidad proyecto, U1.nomunidad facultad 
+from unidad U, unidad U1 
+where U.uni_codunidad=U1.codunidad) O
+where T.maxCal=C.calificacion 
+and C.idinstrumento=I.idinstrumento 
+and T.nominstrumento=I.nominstrumento 
+and O.c1=E.codunidad
+and C.codestudiante=E.codestudiante;
+

@@ -131,7 +131,7 @@ div#modulo{
 }
 
 
-#panel{
+#panel, #panel2{
     width: 100%;
     background: white;
     min-height: 50vh;
@@ -150,4 +150,23 @@ div#modulo{
     box-sizing: border-box;
     border: gray solid 1px;
     margin-bottom: 10px;
+}
+
+
+.Tabla{
+    border: 1px black solid;
+    margin: auto;
+    margin-bottom: 20px;
+    background-color: white;
+    width: 100%;
+}
+
+
+th.ContenidoFila{
+    background-color: gray;
+}
+
+.ContenidoCelda{
+    padding: 10px;
+    box-sizing: border-box;
 }

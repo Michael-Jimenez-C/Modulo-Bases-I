@@ -36,6 +36,37 @@ insert into instrumento values ('5','Trompeta');
 insert into instrumento values ('6','Flauta');
 insert into instrumento values ('7','Guitarra');
  
+--Relacion instrumento---obra
+insert into RELATIONSHIP_24 values ('1','1');
+insert into RELATIONSHIP_24 values ('3','1');
+insert into RELATIONSHIP_24 values ('6','1');
+insert into RELATIONSHIP_24 values ('5','1');
+
+insert into RELATIONSHIP_24 values ('1','2');
+insert into RELATIONSHIP_24 values ('3','2');
+insert into RELATIONSHIP_24 values ('6','2');
+insert into RELATIONSHIP_24 values ('5','2');
+
+
+insert into RELATIONSHIP_24 values ('1','3');
+insert into RELATIONSHIP_24 values ('3','3');
+insert into RELATIONSHIP_24 values ('6','3');
+insert into RELATIONSHIP_24 values ('5','3');
+
+
+insert into RELATIONSHIP_24 values ('1','4');
+insert into RELATIONSHIP_24 values ('3','4');
+insert into RELATIONSHIP_24 values ('6','4');
+insert into RELATIONSHIP_24 values ('5','4');
+
+
+insert into RELATIONSHIP_24 values ('1','5');
+insert into RELATIONSHIP_24 values ('3','5');
+insert into RELATIONSHIP_24 values ('6','5');
+insert into RELATIONSHIP_24 values ('5','5');
+
+
+
 --valor /100->
 insert into listaactividadud values (1,'1','Direccion musical',1500,2);
 insert into listaactividadud values (1,'2','Evaluador musical',800,2);
@@ -64,33 +95,33 @@ insert into unidad values ('9','1','2','Proyecto licenciatura en musica');
 insert into unidad values ('10','1','2','Proyecto licenciatura en musica');
 
 
-insert into estudiante values ('2017100400','3','juan felipe','fernandez rodriguez', date '2017-01-01',date '2001-01-01','jffernandezr@udistrital.edu.co');
-insert into estudiante values ('2017100409','3','juan andres','perez dias', date '2017-01-01',date '2001-01-01','jffernandezr@udistrital.edu.co');
-insert into estudiante values ('2017100429','4','juan carlos','fernandez rodriguez', date '2017-01-01',date '2001-01-01','jcfernandezr@udistrital.edu.co');
-insert into estudiante values ('2017100408','5','juan camilo','rodriguez fernandez', date '2017-01-01',date '2001-01-01','jcrodriguezr@udistrital.edu.co');
-insert into estudiante values ('2017100208','7','diego alberto','gonzales perez', date '2017-01-01',date '2001-01-01','dagonzalesp@udistrital.edu.co');
-insert into estudiante values ('2017100406','3','luz daniela','gonzales dias', date '2017-01-01',date '2001-01-01','ldgonzalesd@udistrital.edu.co');
-insert into estudiante values ('2019100403','3','pedro emilio','gonzales gonzales', date '2019-01-01',date '2001-01-01','pegonzalesg@udistrital.edu.co');
-insert into estudiante values ('2019100406','3','alberto','garcia gaviria', date '2019-01-01',date '2001-01-01','agarciag@udistrital.edu.co');
-insert into estudiante values ('2020100409','3','brian esteban','fernandez garcia', date '2020-01-01',date '2001-01-01','befernandezg@udistrital.edu.co');
-insert into estudiante values ('2020100413','6','esteban alejandro','rodriguez gaviria', date '2020-01-01',date '2001-01-01','earodriguezg@udistrital.edu.co');
-insert into estudiante values ('2020100414','3','alejandro','rodriguez garcia', date '2020-01-01',date '2001-01-01','arodriguezg@udistrital.edu.co');
-insert into estudiante values ('2020100485','8','johan','fernandez rodriguez', date '2020-01-01',date '2001-01-01','jfernandezr@udistrital.edu.co');
-insert into estudiante values ('2020100412','3','luz','dias rodriguez', date '2020-01-01',date '2001-01-01','ldiasr@udistrital.edu.co');
-insert into estudiante values ('2020100422','3','Juan Armando','Paredes dias', date '2020-01-01',date '2001-01-01','japaredesd@udistrital.edu.co');
-insert into estudiante values ('2021100423','7','Julian alejandro','puentes rodriguez', date '2021-01-01',date '2001-01-01','japuentesr@udistrital.edu.co');
-insert into estudiante values ('2021100413','3','felipe andres','fernandez rodriguez', date '2021-01-01',date '2001-01-01','fafernandezr@udistrital.edu.co');
+insert into estudiante values ('2017100400','3','juan felipe','fernandez rodriguez',        date '2023-01-01',date '2017-01-01','jffernandezr@udistrital.edu.co');
+insert into estudiante values ('2017100409','3','juan andres','perez dias',                 date '2023-01-01',date '2017-01-01','jffernandezr@udistrital.edu.co');
+insert into estudiante values ('2017100429','4','juan carlos','fernandez rodriguez',        date '2023-01-01',date '2017-01-01','jcfernandezr@udistrital.edu.co');
+insert into estudiante values ('2017100408','5','juan camilo','rodriguez fernandez',        date '2023-01-01',date '2017-01-01','jcrodriguezr@udistrital.edu.co');
+insert into estudiante values ('2017100208','7','diego alberto','gonzales perez',           date '2023-01-01',date '2017-01-01','dagonzalesp@udistrital.edu.co');
+insert into estudiante values ('2017100406','3','luz daniela','gonzales dias',              date '2023-01-01',date '2017-01-01','ldgonzalesd@udistrital.edu.co');
+insert into estudiante values ('2019100403','3','pedro emilio','gonzales gonzales',         date '2023-01-01',date '2019-01-01','pegonzalesg@udistrital.edu.co');
+insert into estudiante values ('2019100406','3','alberto','garcia gaviria',                 date '2023-01-01',date '2019-01-01','agarciag@udistrital.edu.co');
+insert into estudiante values ('2020100409','3','brian esteban','fernandez garcia',         date '2023-01-01',date '2019-01-01','befernandezg@udistrital.edu.co');
+insert into estudiante values ('2020100413','6','esteban alejandro','rodriguez gaviria',    date '2023-07-01',date '2019-01-01','earodriguezg@udistrital.edu.co');
+insert into estudiante values ('2020100414','3','alejandro','rodriguez garcia',             date '2023-07-01',date '2019-01-01','arodriguezg@udistrital.edu.co');
+insert into estudiante values ('2020100485','8','johan','fernandez rodriguez',              date '2023-07-01',date '2019-01-01','jfernandezr@udistrital.edu.co');
+insert into estudiante values ('2020100412','3','luz','dias rodriguez',                     date '2023-07-01',date '2019-01-01','ldiasr@udistrital.edu.co');
+insert into estudiante values ('2020100422','3','Juan Armando','Paredes dias',              date '2023-07-01',date '2019-01-01','japaredesd@udistrital.edu.co');
+insert into estudiante values ('2021100423','7','Julian alejandro','puentes rodriguez',     date '2023-07-01',date '2019-01-01','japuentesr@udistrital.edu.co');
+insert into estudiante values ('2021100413','3','felipe andres','fernandez rodriguez',      date '2023-07-01',date '2019-01-01','fafernandezr@udistrital.edu.co');
 
-insert into convocatoriaestudiante values ('5','1','7','2017100400',date '2023-04-01',date '2023-05-01',3.6);
-insert into convocatoriaestudiante values ('4','2','1','2017100409',date '2023-04-01',date '2023-05-01',3.4);
-insert into convocatoriaestudiante values ('5','3','2','2017100429',date '2023-04-01',date '2023-05-01',4.3);
-insert into convocatoriaestudiante values ('5','4','1','2017100408',date '2023-04-01',date '2023-05-01',4.4);
-insert into convocatoriaestudiante values ('5','5','4','2021100413',date '2023-04-01',date '2023-05-01',4.5);
-insert into convocatoriaestudiante values ('5','6','3','2021100423',date '2023-04-01',date '2023-05-01',4.3);
-insert into convocatoriaestudiante values ('5','7','2','2020100422',date '2023-04-01',date '2023-05-01',4.8);
-insert into convocatoriaestudiante values ('5','8','5','2020100412',date '2023-04-01',date '2023-05-01',4.5);
-insert into convocatoriaestudiante values ('5','9','2','2020100485',date '2023-04-01',date '2023-05-01',4.2);
-insert into convocatoriaestudiante values ('5','10','3','2020100413',date '2023-04-01',date '2023-05-01',4.9);
+insert into convocatoriaestudiante values ('5','1','7','2017100400',date '2023-02-01',date '2023-06-01',3.6);
+insert into convocatoriaestudiante values ('4','2','1','2017100409',date '2023-02-01',date '2023-06-01',3.4);
+insert into convocatoriaestudiante values ('5','3','1','2017100429',date '2023-02-01',date '2023-06-01',4.3);
+insert into convocatoriaestudiante values ('5','4','1','2017100408',date '2023-02-01',date '2023-06-01',4.4);
+insert into convocatoriaestudiante values ('5','5','4','2021100413',date '2023-02-01',date '2023-06-01',4.5);
+insert into convocatoriaestudiante values ('5','6','3','2021100423',date '2023-02-01',date '2023-06-01',4.3);
+insert into convocatoriaestudiante values ('5','7','6','2020100422',date '2023-02-01',date '2023-06-01',4.8);
+insert into convocatoriaestudiante values ('5','8','5','2020100412',date '2023-02-01',date '2023-06-01',4.5);
+insert into convocatoriaestudiante values ('5','9','6','2020100485',date '2023-02-01',date '2023-06-01',4.2);
+insert into convocatoriaestudiante values ('5','10','3','2020100413',date '2023-02-01',date '2023-06-01',4.9);
 
 insert into rol values (1,'profesor');
 insert into rol values (2,'director');

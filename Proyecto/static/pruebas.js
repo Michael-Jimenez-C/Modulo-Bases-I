@@ -33,24 +33,19 @@ async function combobox(tabla,iD,selector="*"){
 async function init(){
     const root=ReactDOM.createRoot(document.getElementById('root'));
 
-    let cal2=e('input',{id:'fin',type:'date'},null);
-    let tim2=e('input',{id:'finT',type:'Time'},null);
-    let cal1=e('input',{id:'inicio',type:'date'},null);
-    let tim1=e('input',{id:'inicioT',type:'Time'},null);
-
     let tcal=await combobox("tipocalendario","tipocalen");
     
     let obra=await combobox("obra","obr","idobra, titulo");
 
     let est=await combobox("estado","est","idestado,idestado");
 
-    formulario=e('div',{className:'form centrado'},[
+    formulario1=e('div',{className:'form centrado'},[
         e('label',null,'Fecha de inicio'),
-        cal1,
-        tim1,
+        e('input',{id:'inicio',type:'date'},null),
+        e('input',{id:'inicioT',type:'Time'},null),
         e('label',null,'Fecha de finalizacion'),
-        cal2,
-        tim2,
+        e('input',{id:'fin',type:'date'},null),
+        e('input',{id:'finT',type:'Time'},null),
         e('label',null,'Tipo de calendario'),
         tcal,
         e('label',null,'Obra'),
@@ -72,9 +67,23 @@ async function init(){
             }
         }},'Aceptar')
     ])
+    /*
+    let obra2=await combobox("obra","obr2","idobra, titulo");
+    let periodo=await combobox("periodo","per","idperiodo,periodo");
 
-
-    root.render([e('h1',null,'Ingresar fecha y horas para las pruebas'), formulario])
+    formulario2=e('div',{className:'form centrado'},[
+        e('label',null,'Obra'),
+        obra2,
+        e('label',null,'Periodo'),
+        periodo,
+        e('a',{className:'boton',onClick:()=>{
+            let comando=""
+            console.log(comando)
+            consulta(comando,false)
+        }},'Aceptar')
+    ])
+    */
+    root.render([e('h1',null,'Ingresar fecha y horas para las pruebas'), formulario1])
 }
 
 init()
