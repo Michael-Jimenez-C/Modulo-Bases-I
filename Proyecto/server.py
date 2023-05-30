@@ -27,8 +27,10 @@ def cons():
         print(data["comando"])
         dat=GenericCMD.execute({"comando":data['comando'],"commit":True})
         print("ok")
-        
-    return jsonify({"data":dat})
+    try:
+        return jsonify({"data":dat})
+    except:
+        return ""
 
 app.run()
 
