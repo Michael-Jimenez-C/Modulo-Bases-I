@@ -169,16 +169,17 @@ async function asistencia(){
 //-----------------------Liquidación.
 
 async function liquidacion(){
-    async function pdfgen(){
-
-    }
     definepanel()
     let f1=await consulta("select count(C.conseccalendario) from calendario C where C.idestado='Activado' and C.fechainicio<=sysdate and C.fechafin<=sysdate")
     let f2=await consulta("select count(C.conseccalendario) from calendario C, tipocalendario T where C.idestado='Activo' and C.fechafin<=sysdate and C.idtipocalen=T.idtipocalen and (T.DESCTIPOCALENDARIO='Ensayo' or T.DESCTIPOCALENDARIO='Funcion')")
     if (f1['data'][0][0]==0 && f1['data'][0][0]==0){
         panel.render(e('div',{className:"cuadro"},[
-            e('a',{className:"boton", onClick:pdfgen},"Viaticos"),
-            e('a',{className:"boton"},"Electivas")]))
+            e('a',{className:"boton", onClick:()=>{
+                window.open("/descargar_pdf")
+            }},"Viaticos"),
+            e('a',{className:"boton",onClick:()=>{
+                window.open("/enviar_correo")
+            }},"Electivas")]))
     
     }
     panel2.render()
