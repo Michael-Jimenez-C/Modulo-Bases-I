@@ -160,10 +160,55 @@ async function seleccion(){
     }
 }
 
-//-----------------------Liquidacion
+//-----------------------Asistencia
 
 async function asistencia(){
+    async function enviarAsistencia(codigos,vectorverdades,calendario){
+        for(let i of calendario){
+            for(let j=0; j<codigos.length;j++){
+                if (vectorverdades[j]){
+                    console.log("insert into participacionEstudiante values ((select coalesce(v,0)+1 from (select max(consecasis) v from participacionEstudiante)),'"+codigos[j]+"','"+i[0]+"','"+i[1]+"',"+i[2]+")")
+                    consulta("insert into participacionEstudiante values ((select coalesce(v,0)+1 from (select max(consecasis) v from participacionEstudiante)),'"+codigos[j]+"','"+i[0]+"','"+i[1]+"',"+i[2]+")")
+                }
+                
+            }
+            
+        }
+    }
     definepanel()
+    let dat=await consulta("select C.IDTIPOCALEN,C.IDOBRA,C.conseccalendario from calendario C join tipocalendario T on C.idtipocalen=T.idtipocalen where C.idestado='Activo' and C.fechainicio<=sysdate and C.fechafin>=sysdate and (T.DESCTIPOCALENDARIO='Ensayo' or T.DESCTIPOCALENDARIO='Funcion')");
+    if (dat['data'].length!=0){
+        let res=await consulta("select E.nombre||' '||E.apellido, C.codestudiante from  estudiante E, (select I.nominstrumento nominstrumento, max(C.calificacion) maxCal from convocatoriaestudiante C  join instrumento I ON I.idinstrumento=C.idinstrumento group by I.nominstrumento) T, convocatoriaestudiante C, instrumento I where T.maxCal=C.calificacion and C.idinstrumento=I.idinstrumento  and T.nominstrumento=I.nominstrumento and C.codestudiante=E.codestudiante");
+        let tab=[]
+        var fila=[]
+
+        let codigos=[]
+
+        for (let i of ['Nombre','Codigo','Asistencia']){
+            fila.push(e('th', {className:"ContenidoCelda"}, i))
+        }
+        tab.push(e('tr',{className:"ContenidoFila"},fila))
+        let longit=res['data'].length
+        for(let i=0;i<longit;i++){
+            var fila=[]
+            codigos.push(res['data'][i][1])
+            for(let j of res['data'][i]){
+                fila.push(e('td', {className:"ContenidoCelda"}, j))
+            }
+            fila.push(e('input',{type:'checkbox', id:'asistencia'+i}))
+            tab.push(e('tr',{className:"ContenidoFila"},fila))
+        }
+        panel.render([e('table',{className:"Tabla"},tab),e('a',{className:"boton",onClick:()=>{
+            var vv=[]
+            for(let k=0; k<longit;k++){
+                vv.push(document.getElementById('asistencia'+k).checked)
+            }
+            console.log(codigos)
+            console.log(vv)
+            enviarAsistencia(codigos,vv,dat['data'])
+        }},"Enviar")])
+        panel2.render(e('div'))
+    }
 }
 
 //-----------------------Liquidación.

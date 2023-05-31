@@ -104,3 +104,63 @@ from calendario C, tipocalendario T
 where C.fechafin<=sysdate
 and C.idtipocalen=T.idtipocalen
 and (T.DESCTIPOCALENDARIO='Ensayo' or T.DESCTIPOCALENDARIO='Funcion');
+
+
+------------------------------------------------------------------------------------------
+-- Requiero nombre, código, facultad, nohoras, periodo
+
+/*
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CONSECASIS                                NOT NULL NUMBER(4)
+ CODESTUDIANTE                             NOT NULL VARCHAR2(10)
+ IDTIPOCALEN                               NOT NULL VARCHAR2(2)
+ IDOBRA                                    NOT NULL VARCHAR2(4)
+ CONSECCALENDARIO                          NOT NULL NUMBER(4)
+
+
+  Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ IDOBRA                                    NOT NULL VARCHAR2(4)
+ CODPAIS                                   NOT NULL VARCHAR2(3)
+ IDPERIODO                                          NUMBER(4)
+ IDCOMPOSITOR                              NOT NULL VARCHAR2(3)
+ IDGENEROOBRA                              NOT NULL VARCHAR2(2)
+ FECHAOBRA                                 NOT NULL DATE
+ TITULO                                    NOT NULL VARCHAR2(30)
+ ESTADO                                    NOT NULL NUMBER(38)
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ IDPERIODO                                 NOT NULL NUMBER(4)
+ PERIODO                                   NOT NULL VARCHAR2(6)
+*/
+
+select P.periodo 
+from calendario C, obra O, periodo P
+where C.fechafin<sysdate 
+and C.idobra=O.idobra
+and O.idperiodo=P.idperiodo;
+
+
+
+update calendario set idestado='Inactivo' where C.fechafin<sysdate
+
+
+--Horas
+
+select E.nombre||' '||E.apellido ,E.codestudiante, U.nomunidad ,sum(EXTRACT(HOUR FROM C.fechafin-C.fechainicio)+EXTRACT(Day FROM C.fechafin-C.fechainicio)*24+EXTRACT(HOUR FROM C.fechafin-C.fechainicio)*24*30) diferencia
+from calendario C, estudiante E, participacionEstudiante P, unidad U
+where C.conseccalendario=P.conseccalendario 
+and E.codestudiante=P.codestudiante
+and E.codunidad=U.codunidad
+group by E.nombre||' '||E.apellido ,E.codestudiante, U.nomunidad;
+
+
+----
+
+select C.conseccalendario from calendario C join tipocalendario T on C.idtipocalen=T.idtipocalen where C.idestado='Activo' and C.fechainicio<=sysdate and C.fechafin>=sysdate and (T.DESCTIPOCALENDARIO='Ensayo' or T.DESCTIPOCALENDARIO='Funcion');
+
+
+
+select E.nombre||' '||E.apellido, C.codestudiante from  estudiante E, (select I.nominstrumento nominstrumento, max(C.calificacion) maxCal from convocatoriaestudiante C  join instrumento I ON I.idinstrumento=C.idinstrumento group by I.nominstrumento) T, convocatoriaestudiante C, instrumento I where T.maxCal=C.calificacion and C.idinstrumento=I.idinstrumento  and T.nominstrumento=I.nominstrumento and C.codestudiante=E.codestudiante;
