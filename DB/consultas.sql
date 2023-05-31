@@ -86,6 +86,21 @@ and C.codestudiante=E.codestudiante;
  CONSECCALENDARIO                          NOT NULL NUMBER(4)
 */
 
-insert into participacionEstudiante values ((select coalesce(v,0)+1 from (select max(consecasis) v from participacionEstudiante)), ,(select C.idtipocalen,C.idobra,C.conseccalendario from calendario C, tipocalendario T where fechainicio<=sysdate and fechafin>=sysdate and C.idtipocalen=T.idtipocalen and C.idestado='Activo' and T.DESCTIPOCALENDARIO='Seleccion'))
+insert into participacionEstudiante values ((select coalesce(v,0)+1 from (select max(consecasis) v from participacionEstudiante)), ,)
 
-select C.idtipocalen,C.idobra,C.conseccalendario from calendario C, tipocalendario T where fechainicio<=sysdate and fechafin>=sysdate and C.tipocalen=T.tipocalen and 
+select C.idtipocalen,C.idobra,C.conseccalendario from calendario C, tipocalendario T where fechainicio<=sysdate and fechafin>=sysdate and C.idtipocalen=T.idtipocalen and C.idestado='Activo' and T.DESCTIPOCALENDARIO='Seleccion'
+
+-------------------------------------------------------------------------------------
+
+
+select count(conseccalendario)
+from calendario
+where fechainicio<=sysdate
+and fechafin<=sysdate
+
+
+select max(C.fechafin)
+from calendario C, tipocalendario T
+where C.fechafin<=sysdate
+and C.idtipocalen=T.idtipocalen
+and (T.DESCTIPOCALENDARIO='Ensayo' or T.DESCTIPOCALENDARIO='Funcion');

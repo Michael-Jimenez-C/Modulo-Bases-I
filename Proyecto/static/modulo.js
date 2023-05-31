@@ -42,7 +42,13 @@ async function acceder(){
 
 
 
-
+/*
+#######################################################################################################
+#                                                                                                     #
+#                           INTERFACES                                                                #
+#                                                                                                     #
+#######################################################################################################
+*/
 let panel=null;
 let panel2=null;
 
@@ -80,11 +86,14 @@ function definepanel(){
     }
 }
 
+
+
+//---------------------------------------Calendario
 async function calendario(){
     definepanel()
     let dat=await consulta("select O.titulo, C.fechainicio, C.fechafin, C.conseccalendario from calendario C join tipocalendario T on C.idtipocalen=T.idtipocalen join obra O on C.idobra=O.idobra where C.idestado='Activo' and C.fechainicio<=sysdate and C.fechafin>=sysdate and T.DESCTIPOCALENDARIO='Planeacion'")
 
-    paneles=[]
+    let paneles=[]
     for(let i=0;i<dat['data'].length;i++){
         paneles.push(e('div',{className:"cuadro", id:"recuadro"+i},[
             e('h3',null,dat['data'][i][0]),
@@ -102,6 +111,8 @@ async function calendario(){
     panel2.render(e('div'))
 }
 
+
+//--------------------------------Seleccion
 async function seleccion(){
     async function seleccionEv(obra){
         let res=await consulta("select E.nombre, E.apellido, C.codestudiante, O.proyecto, O.facultad, T.nominstrumento, T.maxCal from  estudiante E, (select I.nominstrumento nominstrumento, max(C.calificacion) maxCal from convocatoriaestudiante C  join instrumento I ON I.idinstrumento=C.idinstrumento group by I.nominstrumento) T, convocatoriaestudiante C, instrumento I, (select U.codunidad c1, U.nomunidad proyecto, U1.nomunidad facultad  from unidad U, unidad U1  where U.uni_codunidad=U1.codunidad) O where T.maxCal=C.calificacion  and C.idinstrumento=I.idinstrumento  and T.nominstrumento=I.nominstrumento  and O.c1=E.codunidad and C.codestudiante=E.codestudiante");
@@ -149,22 +160,44 @@ async function seleccion(){
     }
 }
 
+//-----------------------Liquidacion
+
 async function asistencia(){
     definepanel()
 }
 
+//-----------------------Liquidación.
+
 async function liquidacion(){
+    async function pdfgen(){
+
+    }
     definepanel()
+    let f1=await consulta("select count(C.conseccalendario) from calendario C where C.idestado='Activado' and C.fechainicio<=sysdate and C.fechafin<=sysdate")
+    let f2=await consulta("select count(C.conseccalendario) from calendario C, tipocalendario T where C.idestado='Activo' and C.fechafin<=sysdate and C.idtipocalen=T.idtipocalen and (T.DESCTIPOCALENDARIO='Ensayo' or T.DESCTIPOCALENDARIO='Funcion')")
+    if (f1['data'][0][0]==0 && f1['data'][0][0]==0){
+        panel.render(e('div',{className:"cuadro"},[
+            e('a',{className:"boton", onClick:pdfgen},"Viaticos"),
+            e('a',{className:"boton"},"Electivas")]))
+    
+    }
+    panel2.render()
 }
 
 
-//React
+/*
+#######################################################################################################
+#                                                                                                     #
+#                           LOGIN                                                                     #
+#                                                                                                     #
+#######################################################################################################
+*/
 
 const logindiv=document.getElementById('logreg')
 
 const loginroot=ReactDOM.createRoot(logindiv)
 
-login=e('div',{id:'login', className:'form centrado'},[
+let login=e('div',{id:'login', className:'form centrado'},[
     e('h1',null,"Ingresar"),
     e('label',null,"correo"),
     e('input',{type:"email",maxLength:"40", className:"acceder correo",defaultValue:"sanf@gmail.com"},null),

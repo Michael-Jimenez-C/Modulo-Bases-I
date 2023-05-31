@@ -134,7 +134,7 @@ div#modulo{
 #panel, #panel2{
     width: 100%;
     background: white;
-    min-height: 50vh;
+    min-height: 10vh;
     height: max-content;
     padding: 30px;
     box-sizing: border-box;
