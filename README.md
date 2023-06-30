@@ -2,25 +2,27 @@
 
 Este es un proyecto realizado para la materia de bases de datos 1.
  
-Para ejecutarlo hay que abrir CMD o un shell y escribir:
+Para ejecutarlo se requiere de un entorno virtual o tener las librerias instaladas en el equipo, para ello.
+
+Si se quiere hacer con entorno virtual, en CMD se escribe:
+
+```
+python -m venv modulo
+```
+Luego en CMD
 ```
 init.bat
 ```
 
-Posteriormente ejecutar server.py en la carpeta proyecto:
-
-```
-cd Proyecto
-python server.py
-```
-Si aparece un error sobre un modulo que no encuentra ó si no se ejecuta sobre el venv se debe importar las librerias mediante pip
-
+Posteriormente se ejecuta pip para instalar las dependencias:
 ```
 pip install -r requeriments.txt
 ```
 
-Y ahí si ejecutar el server.py desde el venv o desde el equipo directamente.
+finalmente se abre e inicia sesión con el gestor oracle ex
+y se ejecuta server.py
+```
+python Proyecto/server.py
+```
 
-
-#Cosas a cambiar a futuro:
-1. Corregir el funcionamiento de los módulos de react
+Y en inserciones aparece los archivos .sql utilizados, siendo base.sql el que crea las tablas y relaciones, luego datos.sql y datspunto2.sql son archivos que agregar registros a la base de datos.

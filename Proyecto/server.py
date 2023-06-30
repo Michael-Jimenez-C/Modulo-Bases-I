@@ -129,6 +129,9 @@ def descargar_pdf():
 
 @app.route('/enviar_correo')
 def enviar_correo():
+    '''
+    Se supone debería enviar un correo pero no quiero tener que poner credenciales ni contraseñas asi que pongo un remplazo.
+    '''
     return f"<h1>{Message}</h1><p>destinatario {i[0]}</p><p>Asunto Electiva cursada en el grupo Sinfonica UD - periodo {periodo}</p><p>curricular 1 que el estudiante {i[1]} código {i[2]} curso la electiva participación sinfonicaUD durante el período {periodo}</p>"
     
 
