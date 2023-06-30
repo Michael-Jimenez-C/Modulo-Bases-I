@@ -23,6 +23,4 @@ Y ahí si ejecutar el server.py desde el venv o desde el equipo directamente.
 
 
 #Cosas a cambiar a futuro:
-1. Mejorar la conexion al servidor para tener una conexion segura.
-2. Corregir el funcionamiento de los módulos de react
-3. Utilizar otros protocolos u mejores metodos de comunicacion para la base de datos
+1. Corregir el funcionamiento de los módulos de react

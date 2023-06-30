@@ -1,13 +1,6 @@
-from __future__ import annotations
-from abc import ABC, abstractmethod
 from command.Conexion import Conexion
 
-class CMD(ABC):
-    @abstractmethod
-    def execute(self,params:dict)->None:
-        pass        
-
-class GenericCMD(CMD):
+class GenericCMD:
     def execute(params:dict):
         '''
             params debe tener
@@ -18,15 +11,21 @@ class GenericCMD(CMD):
                 "commit": False
             }
         '''
+        assert type(params)==dict, 'El tipo de dato de params no es un diccionario'
+        
         conexion=Conexion.getConexion()
         cur=conexion.cursor()
         cur.execute(params["comando"])
-        if params["commit"]:
-            conexion.commit()
+
+        if 'commit' in params:
+            if params['commit']:
+                conexion.commit()
         try:
             return cur.fetchall()
         except:
             try:
                 return cur
             except:
-                return None
+                return ""
+    def cerrar():
+        Conexion.close()

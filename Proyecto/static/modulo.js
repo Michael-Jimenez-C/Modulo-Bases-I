@@ -1,24 +1,15 @@
+import {actualizar,agregar,consulta} from './consultas.js'
+
 const e = React.createElement;
 
-async function consulta(consulta,returns=true){
-    let c=await fetch(`http://localhost:5000/cons`,{
-        method:"POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body:JSON.stringify({"comando":consulta})
-        });
-    if (!returns){
-        return ""
-    }
-    if(c.ok){
-        let data=await c.json();
-        return data;
-        
-    }
-}
+/*
+#######################################################################################################
+#                                                                                                     #
+#                           INTERFACES                                                                #
+#                                                                                                     #
+#######################################################################################################
+*/
 
-//Funciones de la interfaz
 async function acceder(){
     let correo=document.getElementsByClassName('acceder correo')[0].value;
     
@@ -40,15 +31,6 @@ async function acceder(){
     }
 }
 
-
-
-/*
-#######################################################################################################
-#                                                                                                     #
-#                           INTERFACES                                                                #
-#                                                                                                     #
-#######################################################################################################
-*/
 let panel=null;
 let panel2=null;
 
@@ -91,7 +73,7 @@ function definepanel(){
 //---------------------------------------Calendario
 async function calendario(){
     definepanel()
-    let dat=await consulta("select O.titulo, C.fechainicio, C.fechafin, C.conseccalendario from calendario C join tipocalendario T on C.idtipocalen=T.idtipocalen join obra O on C.idobra=O.idobra where C.idestado='Activo' and C.fechainicio<=sysdate and C.fechafin>=sysdate and T.DESCTIPOCALENDARIO='Planeacion'")
+    let dat=await consulta("O.titulo, C.fechainicio, C.fechafin, C.conseccalendario", "calendario C join tipocalendario T on C.idtipocalen=T.idtipocalen join obra O on C.idobra=O.idobra where C.idestado='Activo' and C.fechainicio<=sysdate and C.fechafin>=sysdate and T.DESCTIPOCALENDARIO='Planeacion'")
 
     let paneles=[]
     for(let i=0;i<dat['data'].length;i++){
@@ -99,7 +81,7 @@ async function calendario(){
             e('h3',null,dat['data'][i][0]),
             e('h3',null,(new Date(dat['data'][i][1])).toLocaleString('es-co',{daysStyle:'short',dateStyle:'long',timeStyle: 'short'})+"---"+(new Date(dat['data'][i][2])).toLocaleString('es-co',{daysStyle:'short',dateStyle:'long',timeStyle: 'short'})),
             e('a',{className:"boton",onClick:()=>{
-                consulta("update calendario set idestado = 'Inactivo' WHERE conseccalendario ="+dat['data'][i][3])
+                actualizar("calendario","idestado","'Inactivo'","WHERE conseccalendario ="+dat['data'][i][3])
                 document.getElementById("recuadro"+i).remove()
             }},'Terminar calendario')
         ]))
@@ -115,7 +97,7 @@ async function calendario(){
 //--------------------------------Seleccion
 async function seleccion(){
     async function seleccionEv(obra){
-        let res=await consulta("select E.nombre, E.apellido, C.codestudiante, O.proyecto, O.facultad, T.nominstrumento, T.maxCal from  estudiante E, (select I.nominstrumento nominstrumento, max(C.calificacion) maxCal from convocatoriaestudiante C  join instrumento I ON I.idinstrumento=C.idinstrumento group by I.nominstrumento) T, convocatoriaestudiante C, instrumento I, (select U.codunidad c1, U.nomunidad proyecto, U1.nomunidad facultad  from unidad U, unidad U1  where U.uni_codunidad=U1.codunidad) O where T.maxCal=C.calificacion  and C.idinstrumento=I.idinstrumento  and T.nominstrumento=I.nominstrumento  and O.c1=E.codunidad and C.codestudiante=E.codestudiante");
+        let res=await consulta("E.nombre, E.apellido, C.codestudiante, O.proyecto, O.facultad, T.nominstrumento, T.maxCal", "estudiante E, (select I.nominstrumento nominstrumento, max(C.calificacion) maxCal from convocatoriaestudiante C  join instrumento I ON I.idinstrumento=C.idinstrumento group by I.nominstrumento) T, convocatoriaestudiante C, instrumento I, (select U.codunidad c1, U.nomunidad proyecto, U1.nomunidad facultad  from unidad U, unidad U1  where U.uni_codunidad=U1.codunidad) O where T.maxCal=C.calificacion  and C.idinstrumento=I.idinstrumento  and T.nominstrumento=I.nominstrumento  and O.c1=E.codunidad and C.codestudiante=E.codestudiante");
         let tab=[]
         var fila=[]
         for (let i of ['Nombre','Apellido','Codigo','Proyecto','Facultad','Instrumento','Calificacion']){
@@ -124,11 +106,11 @@ async function seleccion(){
         tab.push(e('tr',{className:"ContenidoFila"},fila))
 
         for(let i of res['data']){
-            let cale=await consulta("select C.idtipocalen,C.idobra,C.conseccalendario from calendario C, tipocalendario T where fechainicio<=sysdate and fechafin>=sysdate and C.idtipocalen=T.idtipocalen and C.idestado='Activo' and T.DESCTIPOCALENDARIO='Seleccion'")
+            let cale=await consulta("C.idtipocalen,C.idobra,C.conseccalendario","calendario C, tipocalendario T where fechainicio<=sysdate and fechafin>=sysdate and C.idtipocalen=T.idtipocalen and C.idestado='Activo' and T.DESCTIPOCALENDARIO='Seleccion'")
             
             for(let w of cale['data']){
                 console.log("insert into participacionEstudiante values ((select coalesce(v,0)+1 from (select max(consecasis) v from participacionEstudiante)),"+i[2]+","+w[0]+","+w[1]+","+w[2]+")")
-                consulta("insert into participacionEstudiante values ((select coalesce(v,0)+1 from (select max(consecasis) v from participacionEstudiante)),'"+i[2]+"','"+w[0]+"','"+w[1]+"',"+w[2]+")")
+                agregar("participacionEstudiante", "((select coalesce(v,0)+1 from (select max(consecasis) v from participacionEstudiante)),'"+i[2]+"','"+w[0]+"','"+w[1]+"',"+w[2]+")")
             }
             var fila=[]
             for(let j of i){
@@ -140,7 +122,7 @@ async function seleccion(){
 
     }
     definepanel()
-    let dat=await consulta("select O.titulo, C.fechainicio, C.fechafin, C.conseccalendario from calendario C join tipocalendario T on C.idtipocalen=T.idtipocalen join obra O on C.idobra=O.idobra where C.idestado='Activo' and C.fechainicio<=sysdate and C.fechafin>=sysdate and T.DESCTIPOCALENDARIO='Seleccion'");
+    let dat=await consulta("O.titulo, C.fechainicio, C.fechafin, C.conseccalendario","calendario C join tipocalendario T on C.idtipocalen=T.idtipocalen join obra O on C.idobra=O.idobra where C.idestado='Activo' and C.fechainicio<=sysdate and C.fechafin>=sysdate and T.DESCTIPOCALENDARIO='Seleccion'");
     if (dat['data'].length!=0){
         paneles=[]
         for(let i=0;i<dat['data'].length;i++){
@@ -149,7 +131,7 @@ async function seleccion(){
                 e('h3',null,(new Date(dat['data'][i][1])).toLocaleString('es-co',{daysStyle:'short',dateStyle:'long',timeStyle: 'short'})+"---"+(new Date(dat['data'][i][2])).toLocaleString('es-co',{daysStyle:'short',dateStyle:'long',timeStyle: 'short'})),
                 e('a',{className:"boton",onClick:()=>{
                     seleccionEv(dat['data'][i][0]);
-                    consulta("update calendario set idestado = 'Inactivo' WHERE conseccalendario ="+dat['data'][i][3])
+                    actualizar("calendario","idestado","'Inactivo'","WHERE conseccalendario ="+dat['data'][i][3])
                     document.getElementById("recuadro"+i).remove()
                 }},'Seleccionar'),
             ]))
@@ -168,7 +150,7 @@ async function asistencia(){
             for(let j=0; j<codigos.length;j++){
                 if (vectorverdades[j]){
                     console.log("insert into participacionEstudiante values ((select coalesce(v,0)+1 from (select max(consecasis) v from participacionEstudiante)),'"+codigos[j]+"','"+i[0]+"','"+i[1]+"',"+i[2]+")")
-                    consulta("insert into participacionEstudiante values ((select coalesce(v,0)+1 from (select max(consecasis) v from participacionEstudiante)),'"+codigos[j]+"','"+i[0]+"','"+i[1]+"',"+i[2]+")")
+                    agregar("participacionEstudiante","((select coalesce(v,0)+1 from (select max(consecasis) v from participacionEstudiante)),'"+codigos[j]+"','"+i[0]+"','"+i[1]+"',"+i[2]+")")
                 }
                 
             }
@@ -176,9 +158,9 @@ async function asistencia(){
         }
     }
     definepanel()
-    let dat=await consulta("select C.IDTIPOCALEN,C.IDOBRA,C.conseccalendario from calendario C join tipocalendario T on C.idtipocalen=T.idtipocalen where C.idestado='Activo' and C.fechainicio<=sysdate and C.fechafin>=sysdate and (T.DESCTIPOCALENDARIO='Ensayo' or T.DESCTIPOCALENDARIO='Funcion')");
+    let dat=await consulta("C.IDTIPOCALEN,C.IDOBRA,C.conseccalendario","calendario C join tipocalendario T on C.idtipocalen=T.idtipocalen where C.idestado='Activo' and C.fechainicio<=sysdate and C.fechafin>=sysdate and (T.DESCTIPOCALENDARIO='Ensayo' or T.DESCTIPOCALENDARIO='Funcion')");
     if (dat['data'].length!=0){
-        let res=await consulta("select E.nombre||' '||E.apellido, C.codestudiante from  estudiante E, (select I.nominstrumento nominstrumento, max(C.calificacion) maxCal from convocatoriaestudiante C  join instrumento I ON I.idinstrumento=C.idinstrumento group by I.nominstrumento) T, convocatoriaestudiante C, instrumento I where T.maxCal=C.calificacion and C.idinstrumento=I.idinstrumento  and T.nominstrumento=I.nominstrumento and C.codestudiante=E.codestudiante");
+        let res=await consulta("E.nombre||' '||E.apellido, C.codestudiante","estudiante E, (select I.nominstrumento nominstrumento, max(C.calificacion) maxCal from convocatoriaestudiante C  join instrumento I ON I.idinstrumento=C.idinstrumento group by I.nominstrumento) T, convocatoriaestudiante C, instrumento I where T.maxCal=C.calificacion and C.idinstrumento=I.idinstrumento  and T.nominstrumento=I.nominstrumento and C.codestudiante=E.codestudiante");
         let tab=[]
         var fila=[]
 
@@ -215,9 +197,9 @@ async function asistencia(){
 
 async function liquidacion(){
     definepanel()
-    let f1=await consulta("select count(C.conseccalendario) from calendario C where C.idestado='Activado' and C.fechainicio<=sysdate and C.fechafin<=sysdate")
-    let f2=await consulta("select count(C.conseccalendario) from calendario C, tipocalendario T where C.idestado='Activo' and C.fechafin<=sysdate and C.idtipocalen=T.idtipocalen and (T.DESCTIPOCALENDARIO='Ensayo' or T.DESCTIPOCALENDARIO='Funcion')")
-    if (f1['data'][0][0]==0 && f1['data'][0][0]==0){
+    let f1=await consulta("count(C.conseccalendario)","calendario C where C.idestado='Activado' and C.fechainicio<=sysdate and C.fechafin<=sysdate")
+    let f2=await consulta("count(C.conseccalendario)","calendario C, tipocalendario T where C.idestado='Activo' and C.fechafin<=sysdate and C.idtipocalen=T.idtipocalen and (T.DESCTIPOCALENDARIO='Ensayo' or T.DESCTIPOCALENDARIO='Funcion')")
+    if (f1['data'][0][0]==0 && f2['data'][0][0]==0){
         panel.render(e('div',{className:"cuadro"},[
             e('a',{className:"boton", onClick:()=>{
                 window.open("/descargar_pdf")
